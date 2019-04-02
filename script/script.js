@@ -1,4 +1,4 @@
-var initialTask =['Business meeting', 'Appointment with Alice', 'flowers to pick up'];
+var initialTask =['Business meeting', 'Appointment at 19', 'flowers to pick up'];
 let $taskList;
 let $newTaskName;
 let $addTaskButton;
