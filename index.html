@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Bootcamp todo list projekt">
+        <meta name="keywords" content="HTML,CSS,JS">
+        <meta name="author" content="Katarzyna Wisla">
+        
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="css/reset.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <link rel="stylesheet" type="text/css" href="css/style-mobile.css">
+        <link rel="stylesheet" type="text/css" href="css/style-tablet.css">
+        <link rel="stylesheet" type="text/css" href="css/style-desktop.css">
+
+        <link rel="stylesheet" type="text/css" href="css/icon-fonts.css">
+      
+        <title>TODO LIST</title>
+    </head>
+
+    <body>
+        <script src="script/script.js"></script> 
+        <div class="container">
+            <nav class="navigation">
+                <div class="navigation__logo-box">
+                    <i class=" navigation__logo icon-basic-folder-multiple"></i>
+                </div>
+                <div class="navigation__text-box">
+                    <a href="#" target="_blank" title="nav_bar" class="navigation__bar">Calendars</a>
+                    <a href="#" target="_blank" title="nav_bar" class="navigation__bar">Scheduler</a>
+                    <button class="navigation__button" onclick="location.href='http://www.example.com'" type="button"> More Features</button>
+                </div>
+            </nav>
+            <header class="header">
+                <div class="header__text-box">
+                    <h1 class="header-primary u-center-text">
+                        <span class="header-primary--main">ToDOIT</span>
+                        <span class="header-primary--sub"><i class="icon-basic-todolist-pen">Online organizer</i></span>
+                    </h1>
+                </div>
+            </header>
+            <main class="u-center-text u-center-text">
+                <h2 class="heading-secondary">
+                    <span><i class="icon-basic-watch"></i> Make this app save you day!</span>  
+                </h2>
+                <p>
+                    Add, Edit, Remove and mark your task done with magic' boxes below
+                    
+                </p>
+                Write your task here: <input class="task-add" id="add-task-value"><hr>
+                <button id="add-button" class="button-add button-add--animated" type="button">Add your task</button>
+            </main>
+            <section class="list">
+                <ul class="task" id="task-list">
+                    
+                </ul>
+            </section>
+        </div>
+        <footer>
+            <div class="container container--footer">
+                <div class ="container--text">
+                    2019 All Rights Reserved | Designed By Katarzyna Wisła
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
