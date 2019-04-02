@@ -34,8 +34,6 @@ function obiektClickHandler(event){
 }
 
 
-
-
 function acceptChangeHandler(event){
    let $inputChange= event.target.parentElement.getElementsByClassName('change')[0];
    let $acceptBtn = event.target.parentElement.getElementsByClassName('accept')[0];
@@ -49,8 +47,9 @@ function acceptChangeHandler(event){
    $textElement.style.display="";
    $editBtn.style.display="inline-block";
    $removeBtn.style.display="inline-block";
-    debugger;
+  
 }
+
 function obiektEditHandler(event){
     $textElement= event.target.parentElement.getElementsByClassName('element-text')[0];
     $inputChange= event.target.parentElement.getElementsByClassName('change')[0];
@@ -63,10 +62,7 @@ function obiektEditHandler(event){
    $inputChange.value = oldInput;
    $inputChange.style.display="inline-block";
    $acceptBtn.style.display="inline-block";
- 
-   
-  
-   debugger;
+
 }
 
 function removeElement(deletes) {
