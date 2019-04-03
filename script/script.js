@@ -3,38 +3,43 @@ let $taskList;
 let $newTaskName;
 let $addTaskButton;
 
-function primary(){
-
+function primary() {
     $taskList = document.querySelector('#task-list');
     $taskList.classList.add('task--open');
     $newTaskName = document.getElementById('add-task-value');
     $addTaskButton = document.getElementById('add-button');
     $addTaskButton.addEventListener('click', addButtonClickHandler);
-    $taskList.addEventListener('click', obiektClickHandler);
-
+    $taskList.addEventListener('click', listClickManager);
     initialTask.forEach((element) => { 
         addTasks($taskList, element)
     })
 }
 
-function obiektClickHandler(event){
+function listClickManager(event) {
 
-    if(event.target.classList.contains('edit-task')){
-        obiektEditHandler(event);
+    if(event.target.classList.contains('edit-task')) {
+        editHandler(event);
     }
-    else if(event.target.classList.contains('accept')){
-        acceptChangeHandler(event);
-    } else {
-        if(event.target.tagName ==='li'){
-            event.target.classList.toggle('task--finished');
-        } else {
-            event.target.parentElement.classList.toggle('task--finished');
+    else if(event.target.classList.contains('accept')) {
+        acceptChangeHandler(event);   
+    }
+    else if(event.target.classList.contains('cancel')) {
+        cancelChangeHandler(event);    
+    }
+    else if(event.target.classList.contains('remove')) {
+        deleteHandler(event);    
+    }
+    else {
+        if(event.target.tagName === 'LI') {
+            event.target.classList.toggle('completed');
+        } 
+            else { 
+                event.target.parentElement.classList.toggle('completed');
+            }
         }
     }
-}
 
-
-function acceptChangeHandler(event){
+function acceptChangeHandler(event) {
    let $inputChange= event.target.parentElement.getElementsByClassName('change')[0];
    let $acceptBtn = event.target.parentElement.getElementsByClassName('accept')[0];
    $inputChange.style.display="none";
@@ -43,18 +48,35 @@ function acceptChangeHandler(event){
    let $editBtn= event.target.parentElement.getElementsByClassName('edit-task')[0];
    let $textElement= event.target.parentElement.getElementsByClassName('element-text')[0];
    let $removeBtn = event.target.parentElement.getElementsByClassName('remove')[0];
+   let $cancelBtn = event.target.parentElement.getElementsByClassName('cancel')[0];
    $textElement.textContent= $inputChange.value;
    $textElement.style.display="";
    $editBtn.style.display="inline-block";
    $removeBtn.style.display="inline-block";
-  
+   $cancelBtn.style.display ="none";
 }
 
-function obiektEditHandler(event){
-    $textElement= event.target.parentElement.getElementsByClassName('element-text')[0];
-    $inputChange= event.target.parentElement.getElementsByClassName('change')[0];
-    $acceptBtn = event.target.parentElement.getElementsByClassName('accept')[0];
-    $removeBtn = event.target.parentElement.getElementsByClassName('remove')[0];
+function cancelChangeHandler(event) {
+    let $inputChange= event.target.parentElement.getElementsByClassName('change')[0];
+    let $acceptBtn = event.target.parentElement.getElementsByClassName('accept')[0];
+    let $editBtn= event.target.parentElement.getElementsByClassName('edit-task')[0];
+    let $removeBtn = event.target.parentElement.getElementsByClassName('remove')[0];
+    let $textElement= event.target.parentElement.getElementsByClassName('element-text')[0];
+    let $cancelBtn = event.target.parentElement.getElementsByClassName('cancel')[0];
+    $inputChange.style.display ="none";
+    $acceptBtn.style.display ="none";
+    $cancelBtn.style.display ="none";
+    $removeBtn.style.display ="inline-block";
+    $textElement.style.display = "inline-block";
+    $editBtn.style.display = "inline-block";
+}
+
+function editHandler(event) {
+   $textElement= event.target.parentElement.getElementsByClassName('element-text')[0];
+   $inputChange= event.target.parentElement.getElementsByClassName('change')[0];
+   $acceptBtn = event.target.parentElement.getElementsByClassName('accept')[0];
+   $cancelBtn = event.target.parentElement.getElementsByClassName('cancel')[0];
+   $removeBtn = event.target.parentElement.getElementsByClassName('remove')[0];
    let oldInput=$textElement.textContent;
    $textElement.style.display="none";
    event.target.style.display="none";
@@ -62,71 +84,60 @@ function obiektEditHandler(event){
    $inputChange.value = oldInput;
    $inputChange.style.display="inline-block";
    $acceptBtn.style.display="inline-block";
-
+   $cancelBtn.style.display="inline-block";
 }
 
-function removeElement(deletes) {
-    var deletes = document.querySelectorAll('.remove')
-    deletes.forEach(element => {element= this.parentNode
-    element.remove()
-})
+function deleteHandler(event) {
+    let deletes = event.target.parentElement;
+    deletes.remove();
 }
-removeElement();
 
 
-
-function addTasks (list, name){
+function addTasks (list, name) {
 
     let elementText= document.createElement('span');
+    let editButton = document.createElement('button');
     let newElement = document.createElement('li');
-//adding new edit button element
     elementText.textContent=name;
     elementText.classList.add('element-text');
+    editButton.textContent='Edit'; 
+    editButton.addEventListener('click', editHandler);
 
-    let editButton = document.createElement('button');//nowy element button
-    editButton.textContent='Edit'; //nadany tekst elementu button
-    editButton.addEventListener('click', obiektEditHandler);
-
-    let acceptButton = document.createElement('button');//nowy ukryty element accept button
+    let acceptButton = document.createElement('button');
     acceptButton.textContent='Accept'; 
     acceptButton.classList.add('accept');
     acceptButton.style.display='none';
 
+    let cancelButton = document.createElement('button');
+    cancelButton.textContent='Cancel'; 
+    cancelButton.classList.add('cancel');
+    cancelButton.style.display='none';
 
     let changeInput = document.createElement('input');
     changeInput.textContent= 'change your task'; 
     changeInput.classList.add('change');
     changeInput.style.display='none';
 
-    let removeButton = document.createElement('button');//nowy element button
-    removeButton.textContent='Delete'; //nadany tekst elementu button
+    let removeButton = document.createElement('button');
+    removeButton.textContent='Delete'; 
     removeButton.classList.add('remove');
-    removeButton.addEventListener('click', removeElement);
-
-//Ikony listy
-
+   
     let taskListIcon = document.createElement('i');
     taskListIcon.classList.add ('icon-basic-todolist-pen');
     editButton.classList.add('edit-task');
-
-    //attaching elements to element
     newElement.appendChild(elementText);
-
-  //Edit, Accept, buttons  
+ 
     newElement.appendChild(acceptButton);
+    newElement.appendChild(cancelButton);
     newElement.appendChild(changeInput);
     newElement.appendChild(editButton);
-//ikona dołączona do listy
-   newElement.insertBefore(taskListIcon, newElement.firstChild);
-   newElement.insertBefore(removeButton, newElement.lastChild);
-// nowy element do listy poczatkowej
+    newElement.insertBefore(taskListIcon, newElement.firstChild);
+    newElement.insertBefore(removeButton, newElement.lastChild);
     list.appendChild(newElement);
 }
 
-//pobieranie wartości
-function addButtonClickHandler(){
+function addButtonClickHandler() {
     let newTask= $newTaskName.value;
-//dodanie wartości do funkcji addTasks
     if(newTask) {
         addTasks($taskList, newTask);
         $newTaskName.value ="";
