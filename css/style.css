@@ -152,26 +152,46 @@ body {
 
 .task {
   padding: 2rem;
-  margin-bottom: 1rem;
-}
-.task--open {
+  margin:0 auto;
   color:red;
+  cursor: pointer;
+  text-align:left;
 }
-.task--finished {
+
+.completed {
   color: green;
   text-decoration: line-through;
 }
 
-button.edit-task, .remove, .accept {
-  background-color: white;
-  font-size: 1.2rem;
-  align-items: center;
-  margin-left: 1rem;
-  padding: .5rem 1rem;
-  border: none;
-  border-radius: 2px;
+button.edit-task {
+  background: rgb(132, 190, 132);
+  color: white;
+  padding: 5px 20px;
+  border: 0;
+  cursor: pointer;
 }
 
+.accept, .cancel {
+  margin-left: 2px;
+  background: #7C7B83;
+  border: 0;
+  padding: 5px 10px;
+  color: white
+}
+
+.cancel {
+  margin-right: 2px;
+}
+
+.remove {
+  background: #F53D3D;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 0;
+  margin-right: 1rem;
+  margin-left: 30px;
+}
 
 .button-add {
   margin-top: 1rem;
