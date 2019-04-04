@@ -144,14 +144,14 @@ body {
   padding: 2rem;
 }
 
-
+.list {
+  margin-left: 10%;
+  padding-bottom: 2rem;
+  
+}
 .icon-basic-watch, .icon-basic-todolist-pen {
   font-size: 5rem;
   font-weight: 900;
-}
-
-.people {
-  padding: 2rem;
 }
 
 .button-add {
@@ -172,9 +172,6 @@ body {
   animation: moveInBottom .5s .75s;
   animation-fill-mode: backwards; }
 
-.list {
-  margin-left: 20%;
-}
 footer {
   display: flex; }
 
