@@ -29,6 +29,11 @@
         font-size: 2rem;
         font-weight: 600;
     } 
+    .list {
+      margin-left: 0;
+      padding-bottom: 2rem;
+      
+    }
     .container--text {
         font-size: 1.2rem; 
     }
