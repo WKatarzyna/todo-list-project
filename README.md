@@ -14,3 +14,5 @@ Marking a task as done
 
 3. Technical assumptions:
 Project will be further extended in the future with the server communication and database
+
+website:https://wkatarzyna.github.io/todo-list-project/
