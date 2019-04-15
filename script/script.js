@@ -1,19 +1,31 @@
-var initialTask = ['Business meeting', 'Appointment at 19', 'flowers to pick up'];
 let $taskList;
 let $newTaskName;
 let $addTaskButton;
 
 function primary() {
+  
     $taskList = document.querySelector('#task-list');
     $taskList.classList.add('task--open');
     $newTaskName = document.getElementById('add-task-value');
     $addTaskButton = document.getElementById('add-button');
     $addTaskButton.addEventListener('click', addButtonClickHandler);
     $taskList.addEventListener('click', listClickManager);
-    initialTask.forEach((element) => { 
-        addTasks($taskList, element)
-    })
+
+    getTodos();
+
 }
+
+function getTodos() {
+    axios('http://195.181.210.249:3000/todo/')
+        .then(response => response.data)
+        .then(data => {
+            data.forEach(element => {
+                addTasks($taskList, element.title, element.id)
+            });
+        })
+}
+
+      
 
 function listClickManager(event) {
 
@@ -35,7 +47,8 @@ function listClickManager(event) {
         cancelChangeHandler($textElement, $inputChange, $acceptBtn, $editBtn, $removeBtn, $cancelBtn);    
     }
     else if(event.target.classList.contains('remove')) {
-        deleteHandler(event);    
+        deleteHandler(event); 
+        
     }
     else {
         if(event.target.tagName === 'LI') {
@@ -55,7 +68,9 @@ function acceptChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, 
    $editBtn.style.display = "inline-block";
    $removeBtn.style.display = "inline-block";
    $cancelBtn.style.display = "none";
+   
 }
+
 
 function cancelChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, $removeBtn, $cancelBtn) {
     $inputChange.style.display = "none";
@@ -67,8 +82,8 @@ function cancelChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, 
 }
 
 function editHandler(event, $textElement, $inputChange, $acceptBtn, $removeBtn, $cancelBtn) {
-  
    let oldInput=$textElement.textContent;
+   
    $textElement.style.display = "none";
    event.target.style.display = "none";
    $removeBtn.style.display = "none";
@@ -76,11 +91,15 @@ function editHandler(event, $textElement, $inputChange, $acceptBtn, $removeBtn, 
    $inputChange.style.display = "inline-block";
    $acceptBtn.style.display = "inline-block";
    $cancelBtn.style.display = "inline-block";
+
 }
 
+
+
 function deleteHandler(event) {
-    let deletes = event.target.parentElement;
-    deletes.remove();
+        event.target.parentElement.remove();
+    
+        
 }
 
 
@@ -132,7 +151,15 @@ function addTasks (list, name) {
 function addButtonClickHandler() {
     let newTask= $newTaskName.value;
     if(newTask) {
-        addTasks($taskList, newTask);
+        axios.post('http://195.181.210.249:3000/todo/', {
+            title: newTask,
+            author: 'Kasia-Comp'
+        })
+        .then(function () {
+            $taskList.innerHTML = '';
+            getTodos();
+        })
+
         $newTaskName.value ="";
     }
       
