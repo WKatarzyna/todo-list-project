@@ -118,7 +118,6 @@ function addTasks (list, name, taskId) {
     let editButton = document.createElement('button');
     editButton.classList.add('edit-task');
     editButton.textContent ='Edit'; 
-    editButton.addEventListener('click', editHandler);
     editButton.dataset.id= taskId;
    
     let newElement = document.createElement('li');
