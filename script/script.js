@@ -23,9 +23,7 @@ function getTodos() {
                 addTasks($taskList, element.title, element.id)
             });
         })
-}
-
-      
+    }
 
 function listClickManager(event) {
 
@@ -72,7 +70,6 @@ function acceptChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, 
 
 }
 
-
 function cancelChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, $removeBtn, $cancelBtn) {
     $inputChange.style.display = "none";
     $acceptBtn.style.display = "none";
@@ -85,30 +82,28 @@ function cancelChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, 
 function editHandler(event,$textElement, $inputChange, $acceptBtn, $removeBtn, $cancelBtn, id) {
    let oldInput;
    oldInput = $textElement.textContent;
+   $inputChange.value = oldInput;
    $textElement.style.display = "none";
    event.target.style.display = "none";
    $removeBtn.style.display = "none";
    $inputChange.style.display = "inline-block";
    $acceptBtn.style.display = "inline-block";
    $cancelBtn.style.display = "inline-block";
-   axios.put('http://195.181.210.249:3000/todo/' + id, {
-    title: oldInput,
-    author: 'Kasia-Comp'
-  })
-  .then(response => {
-    $textElement.textContent.value;
-    response.push();
-  })
-
+   if(oldInput) {
+       axios.put('http://195.181.210.249:3000/todo/'+ id, {
+           title: oldInput,
+           author: 'Kasia-Comp'
+        })
+        .then(function () {
+            $textElement.textContent;
+            $textElement.textContent=$inputChange.value;
+        })
+    }
 }
-
-
 
 function deleteHandler(event, id) {
     axios.delete('http://195.181.210.249:3000/todo/' + id);
-        event.target.parentElement.remove();
-    
-        
+    event.target.parentElement.remove();
 }
 
 
