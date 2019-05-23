@@ -36,10 +36,10 @@ function listClickManager(event) {
 
 
     if(event.target.classList.contains('edit-task')) {
-        editHandler(event,$textElement, $inputChange, $acceptBtn, $removeBtn, $cancelBtn, event.target.dataset.id);
+        editHandler(event,$textElement, $inputChange, $acceptBtn, $removeBtn, $cancelBtn);
     }
     else if(event.target.classList.contains('accept')) {
-        acceptChangeHandler($textElement, $inputChange, $acceptBtn, $editBtn, $removeBtn, $cancelBtn);   
+        acceptChangeHandler($textElement, $inputChange, $acceptBtn, $editBtn, $removeBtn, $cancelBtn,event.target.dataset.id);   
     }
     else if(event.target.classList.contains('cancel')) {
         cancelChangeHandler($textElement, $inputChange, $acceptBtn, $editBtn, $removeBtn, $cancelBtn);    
@@ -59,16 +59,27 @@ function listClickManager(event) {
         }
     }
 
-function acceptChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, $removeBtn, $cancelBtn) { 
+function acceptChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, $removeBtn, $cancelBtn,id) {
    $inputChange.style.display = "none";
    $acceptBtn.style.display = "none";
    $textElement.style.display ="";
-   $textElement.textContent = $inputChange.value;
+   //$textElement.textContent = $inputChange.value;
    $editBtn.style.display = "inline-block";
    $removeBtn.style.display = "inline-block";
    $cancelBtn.style.display = "none";
-
+   if($textElement.textContent) {
+    axios.put('http://195.181.210.249:3000/todo/'+ id, {
+        title: $textElement,
+        author: 'Kasia-Comp'
+     })
+     .then(function () {
+        $textElement.textContent
+         $textElement.textContent=$inputChange.value;
+     })
 }
+}
+
+
 
 function cancelChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, $removeBtn, $cancelBtn) {
     $inputChange.style.display = "none";
@@ -89,16 +100,8 @@ function editHandler(event,$textElement, $inputChange, $acceptBtn, $removeBtn, $
    $inputChange.style.display = "inline-block";
    $acceptBtn.style.display = "inline-block";
    $cancelBtn.style.display = "inline-block";
-   if(oldInput) {
-       axios.put('http://195.181.210.249:3000/todo/'+ id, {
-           title: oldInput,
-           author: 'Kasia-Comp'
-        })
-        .then(function () {
-            $textElement.textContent;
-            $textElement.textContent=$inputChange.value;
-        })
-    }
+   $textElement.textContent;
+   $textElement.textContent=$inputChange.value;
 }
 
 function deleteHandler(event, id) {
