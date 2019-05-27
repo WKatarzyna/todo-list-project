@@ -63,21 +63,23 @@ function acceptChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, 
    $inputChange.style.display = "none";
    $acceptBtn.style.display = "none";
    $textElement.style.display ="";
-   //$textElement.textContent = $inputChange.value;
+   $textElement.textContent = $inputChange.value;
    $editBtn.style.display = "inline-block";
    $removeBtn.style.display = "inline-block";
    $cancelBtn.style.display = "none";
-   if($textElement.textContent) {
     axios.put('http://195.181.210.249:3000/todo/'+ id, {
-        title: $textElement,
+        title: $inputChange.value,
         author: 'Kasia-Comp'
      })
      .then(function () {
         $textElement.textContent
-         $textElement.textContent=$inputChange.value;
+        
+        console.log("test" + $textElement.textContent);
+        console.log("test" + $inputChange.value);
+       
      })
 }
-}
+
 
 
 
@@ -90,7 +92,7 @@ function cancelChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, 
     $editBtn.style.display = "inline-block";
 }
 
-function editHandler(event,$textElement, $inputChange, $acceptBtn, $removeBtn, $cancelBtn, id) {
+function editHandler(event,$textElement, $inputChange, $acceptBtn, $removeBtn, $cancelBtn) {
    let oldInput;
    oldInput = $textElement.textContent;
    $inputChange.value = oldInput;
