@@ -73,10 +73,6 @@ function acceptChangeHandler( $textElement, $inputChange, $acceptBtn, $editBtn, 
      })
      .then(function () {
         $textElement.textContent
-        
-        console.log("test" + $textElement.textContent);
-        console.log("test" + $inputChange.value);
-       
      })
 }
 
@@ -116,6 +112,7 @@ function addTasks (list, name, taskId) {
     let elementText = document.createElement('span');
     elementText.textContent = name;
     elementText.classList.add('element-text');
+    
 
     let taskListIcon = document.createElement('i');
     taskListIcon.classList.add ('icon-basic-todolist-pen');
@@ -131,6 +128,7 @@ function addTasks (list, name, taskId) {
     acceptButton.textContent = 'Accept'; 
     acceptButton.classList.add('accept');
     acceptButton.style.display ='none';
+    acceptButton.dataset.id= taskId;
 
     let cancelButton = document.createElement('button');
     cancelButton.textContent = 'Cancel'; 
